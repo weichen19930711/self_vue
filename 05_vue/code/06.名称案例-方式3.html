@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="./lib/vue-2.4.0.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <input type="text" v-model="firstname" /> + 
+    <input type="text" v-model="lastname" /> =
+    <input type="text" v-model="fullname"/>
+   
+    <br/>
+    <!-- 后三次的fullname 都是从缓存中获取的【不会去调用fullname】-->
+    {{ fullname }}<br/>
+    {{ fullname }}<br/>
+    {{ fullname }}<br/>
+    {{ show() }}<br/>
+    {{ show() }}<br/>
+  </div>
+  <script>
+    var vm = new Vue({
+      el:'#app',
+      data: {
+        firstname: '',
+        lastname: ''
+      },
+      computed: {
+        'fullname': function(){
+          console.log('ok')
+          return this.firstname + "." + this.lastname
+        }
+      },
+      methods: {
+        show() {
+          console.log('ok--')
+          return this.lastname
+        }
+      }
+    })  
+  </script>
+</body>
+
+</html>

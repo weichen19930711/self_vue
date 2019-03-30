@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="./lib/vue-2.4.0.js"></script>
+  <script src="./lib/vue-resource-1.3.4.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <input type="button" value="Get请求" @click="getInfo">
+    <input type="button" value="Post请求" @click="postInfo">
+    <input type="button" value="Jsonp请求" @click="jsonpInfo">
+  </div>
+
+  <script>
+    var vm = new Vue({
+      el: '#app',
+      data: {
+
+      },
+      methods: {
+        getInfo() {
+          this.$http.get('http://www.liulongbin.top:3005/api/getprodlist').then(function(result){
+            if(result.status === 200){
+              console.log(result.body)
+            }
+          })
+        },
+        postInfo() {
+          this.$http.post('http://localhost:8081/50ETFmanager/share_app/pulling_option_entrust',{
+            uniqueToken: 1
+          }, {
+            emulateJSON: true
+          }).then(result => {
+            console.log(result)
+          })
+        },
+        jsonpInfo() {
+          this.$http.jsonp('http://www.runoob.com/try/ajax/jsonp.php').then(result => {
+            console.log(result.body)
+          })
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document_</title>
+  <script src="./lib/vue-2.4.0.js"></script>
+  <script src="./lib/vue-router-3.0.1.js"></script>
+</head>
+
+<body>
+    <div id="app">
+      <router-link to="/login/chen/18">登录</router-link>
+      <router-link to="/register">注册</router-link>
+      <!--占位符 <==> {{ }}-->
+      <router-view></router-view> 
+    </div>
+
+    <script>
+      var login = {
+        template: '<h1>登录组件 -- {{ $route.params.name }} -- {{ $route.params.pwd }} </h1>',
+        data() {
+          return {
+            msg: 'son msg'
+          }
+        },
+        beforeCreate() {
+          console.log(this.$route.params.name)
+          console.log(this.$route.params.pwd)
+        }
+      }
+
+      var register = {
+        template:'<h1>注册组件</h1>'
+      }
+
+      var router = new VueRouter({
+        routes: [
+          {
+            path:'/login/:name/:pwd',
+            component: login
+          },
+          {
+            path:'/register',
+            component: register
+          }
+        ]
+      })
+
+      //父组件
+      var vm = new Vue({
+        el: '#app',
+        data: {
+          
+        },
+        router
+      });
+    </script>
+
+</body>
+</html>

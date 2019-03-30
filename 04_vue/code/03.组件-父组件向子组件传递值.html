@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document_</title>
+  <script src="./lib/vue-2.4.0.js"></script>
+  <style>
+
+  </style>
+</head>
+
+<body>
+    <div id="app">
+      <com1 :parentmsg="msg"></com1>
+    </div>
+
+    <script>
+      var vm = new Vue({
+        el: '#app',
+        data: {
+          msg: '这是父组件的msg'
+        },
+        methods: {
+        },
+        components: {
+          com1: {
+            data(){
+              return {
+                title: '123',
+                content: 'qqq'
+              }
+            },
+            template: "<h3 @click='change'>这是子组件 --- {{ parentmsg }}</h3>",
+            props: ['parentmsg'],
+            methods: {
+              change() {
+                //这样改会有warn, Vue不提倡这样改
+                this.parentmsg = '被修改了'
+              }
+            }
+          }
+        }
+      });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document_</title>
+  <script src="./lib/vue-2.4.0.js"></script>
+</head>
+
+<body>
+    <div id="app">
+      <counter></counter>
+      <hr/>
+      <counter></counter>
+      <hr/>
+      <counter></counter>
+      <hr/>
+    </div>
+
+    <template id="tmp">
+      <div>
+        <input type="button" value="+1" @click="increment"/>
+        <span>{{ count }}</span>
+      </div>
+    </template>
+
+    <script>
+      var dataObj = {count:0}
+      /*
+        如果不返回函数, 那么data是一个公共的对象，被所有组件共享，当改变一个组件的值，
+        其他的组件也会有影响，所以要返回一个function，且function返回一个私有的对象{}
+      */
+      Vue.component('counter', {
+        template: '#tmp',
+        data: function() {
+          //return dataObj
+          return {count: 0}
+        },
+        methods: {
+          increment() {
+            this.count++
+          }
+        }
+      })
+
+      var vm = new Vue({
+        el: '#app',
+        data: {
+        },
+        methods: {
+        }
+      })
+    </script>
+
+</body>
+</html>
