@@ -45,8 +45,14 @@
       <transition mode="out-in">
         <router-view></router-view>
       </transition>
+      
+      <test></test>
     </div>
 
+    <template id="tmp">
+      <router-view></router-view>
+    </template>
+    
     <script>
 
       var login = {
@@ -54,6 +60,9 @@
       }
       var register = {
         template: '<h1>注册组件</h1>',
+      }
+      var test = {
+        template: '#tmp'
       }
 
       var routeObj = new VueRouter({
@@ -82,7 +91,10 @@
         },
         methods: {
         },
-        router: routeObj
+        router: routeObj,
+        components: {
+          test
+        }
       });
     </script>
 

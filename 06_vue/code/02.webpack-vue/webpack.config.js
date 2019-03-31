@@ -2,6 +2,7 @@ const path = require("path")
 
 const HtmlWebpackPlugin = require("html-webpack-plugin")
 
+const VueLoaderPlugin = require("vue-loader/lib/plugin")
 
 module.exports = {
     entry: {
@@ -15,7 +16,8 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, "./src/index.html"),
             filename: 'index.html'
-        })
+        }),
+        new VueLoaderPlugin()
     ],
     module: {
         rules: [
@@ -40,11 +42,16 @@ module.exports = {
                 loader: 'babel-loader',
                 include: path.join(__dirname, './src'),
                 exclude: /node_modules/
+            },
+            {
+                test: /\.vue$/,
+                loader: 'vue-loader'
             }
         ]
     },
     resolve: {
         alias: {
+            //import ** from "vue" 以vue结尾的时候，指定导入的文件，修改配置文件要重新编译
             //'vue$': 'vue/dist/vue.esm.js'
         }
     }
