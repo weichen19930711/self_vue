@@ -5,9 +5,6 @@ import router from './router.js'
 
 var vm = new Vue({
     el: '#app',
-    data: {
-
-    },
     render: c => c(app),
     router
 })
