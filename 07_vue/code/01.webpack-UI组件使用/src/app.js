@@ -9,7 +9,7 @@ import router from './router.js'
 import { Button } from 'mint-ui' //按需导入
 Vue.component(Button.name, Button)
 import 'bootstrap/dist/css/bootstrap.css'
-
+import './lib/mui/css/mui.min.css'
 
 var vm = new Vue({
     el: '#app',

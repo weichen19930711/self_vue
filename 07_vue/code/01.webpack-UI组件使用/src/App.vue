@@ -5,6 +5,10 @@
     <router-link to="/account">Account</router-link>
     <router-link to="/goodsList">GoodsList</router-link>
     <router-view></router-view>
+
+    <button type="button" class="mui-btn mui-btn-warning">
+      黄色
+    </button>
   </div>
 </template>
 <script>
