@@ -4,6 +4,8 @@
     <mt-header fixed title="饿了么"></mt-header>
     <!--content-->
     <h1>这是 App 组件</h1>
+		<router-link to="/login">login</router-link>
+		<router-view></router-view>
     <!--tabbar-->
     <nav class="mui-bar mui-bar-tab">
 			<a class="mui-tab-item mui-active" href="#tabbar">
