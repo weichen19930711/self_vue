@@ -5,6 +5,7 @@
     <!--content-->
     <h1>这是 App 组件</h1>
 		<router-link to="/login">login</router-link>
+		<router-link to="/count">count</router-link>
 		<router-view></router-view>
     <!--tabbar-->
     <nav class="mui-bar mui-bar-tab">

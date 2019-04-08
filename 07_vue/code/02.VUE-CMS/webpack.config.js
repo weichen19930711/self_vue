@@ -57,6 +57,8 @@ module.exports = {
         alias: {
             //import ** from "vue" 以vue结尾的时候，指定导入的文件，修改配置文件要重新编译
             //'vue$': 'vue/dist/vue.esm.js'
+            '@': path.join(__dirname, 'src') 
         }
+       
     }
 }

@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 import login from './views/login.vue'
+import count from './components/count.vue'
 
 Vue.use(VueRouter)
 
@@ -14,6 +15,10 @@ var router = new VueRouter({
         {
             path: "/login",
             component: login
+        },
+        {
+            path: "/count",
+            component: count
         }
     ]
 })
