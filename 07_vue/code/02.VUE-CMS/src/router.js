@@ -3,6 +3,14 @@ import VueRouter from 'vue-router'
 
 import login from './views/login.vue'
 import count from './components/count.vue'
+import HomeContainer from './components/tabbar/HomeContainer.vue'
+import MemberContainer from './components/tabbar/MemberContainer.vue'
+import SearchContainer from './components/tabbar/SearchContainer.vue'
+import ShopcarContainer from './components/tabbar/ShopcarContainer.vue'
+
+import NewsList from './components/news/NewsList.vue'
+import NewsInfo from './components/news/NewsInfo.vue'
+
 
 Vue.use(VueRouter)
 
@@ -10,7 +18,7 @@ var router = new VueRouter({
     routes: [
         {
             path: "/",
-            component: login
+            component: HomeContainer
         },
         {
             path: "/login",
@@ -19,8 +27,33 @@ var router = new VueRouter({
         {
             path: "/count",
             component: count
+        },
+        {
+            path: "/home",
+            component: HomeContainer
+        },
+        {
+            path: "/member",
+            component: MemberContainer
+        },
+        {
+            path: "/search",
+            component: SearchContainer
+        },
+        {
+            path: "/cart",
+            component: ShopcarContainer
+        },
+        {
+            path: "/home/newslist",
+            component: NewsList
+        },
+        {
+            path: "/home/newslist/:id",
+            component: NewsInfo
         }
-    ]
+    ],
+    linkActiveClass: "mui-active"
 })
 
 export default router
