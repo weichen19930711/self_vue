@@ -35,6 +35,9 @@ Vue.http.options.root = 'http://www.liulongbin.top:3005'
 // 全局设置 post 时候表单数据格式组织形式   application/x-www-form-urlencoded
 Vue.http.options.emulateJSON = true;
 
+import VuePreview from 'vue-preview'
+Vue.use(VuePreview)
+
 import './filters/dateFormat.js'
 router.beforeEach((to, from, next) => {
     console.log("before each...")

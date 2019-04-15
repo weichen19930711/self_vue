@@ -12,6 +12,7 @@ import NewsList from './components/news/NewsList.vue'
 import NewsInfo from './components/news/NewsInfo.vue'
 
 import PhotoList from './components/photos/PhotoList.vue'
+import PhotoInfo from './components/photos/PhotoInfo.vue'
 
 Vue.use(VueRouter)
 
@@ -56,6 +57,10 @@ var router = new VueRouter({
         {
             path: "/home/photolist",
             component: PhotoList
+        },
+        {
+            path: "/home/photoInfo/:id",
+            component: PhotoInfo
         }
     ],
     linkActiveClass: "mui-active"
