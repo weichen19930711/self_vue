@@ -1,53 +1,80 @@
 <template>
+  <!-- router-link 跳转 标签跳转-->
+  <!-- <div class="goods-list">
+    <router-link v-for="item in goodsList" :key="item.id" class="goods-item" :to="'/home/goodsinfo/' + item.id" tag="div">
+      <img :src="item.img_url"/>
+      <h3> {{ item.title }}</h3>
+      <div class="info">
+        <p class="price">
+          <span class="now">￥{{ item.sell_price }}</span>
+          <span class="old">￥{{ item.market_price }}</span>
+        </p>
+        <p class="sell">
+          <span>热卖中</span>
+          <span>剩{{ item.stock_quantity }}件</span>
+        </p>
+      </div>
+    </router-link>
+    <mt-button type="danger" size="large" @click="getMore">加载更多</mt-button>
+  </div> -->
+
+  <!-- 编程式跳转-->
   <div class="goods-list">
-    <div class="goods-item">
-      <img src="http://demo.dtcms.net/upload/201504/20/thumb_201504200046589514.jpg"/>
-      <h3>华为（HUAWEI）荣耀6Plus 16G双4G版</h3>
+    <div v-for="item in goodsList" :key="item.id" class="goods-item" @click="goDetail(item.id)">
+      <img :src="item.img_url"/>
+      <h3> {{ item.title }}</h3>
       <div class="info">
         <p class="price">
-          <span class="now">￥2195</span>
-          <span class="old">￥2499</span>
+          <span class="now">￥{{ item.sell_price }}</span>
+          <span class="old">￥{{ item.market_price }}</span>
         </p>
         <p class="sell">
           <span>热卖中</span>
-          <span>剩60件</span>
+          <span>剩{{ item.stock_quantity }}件</span>
         </p>
       </div>
     </div>
-    <div class="goods-item">
-      <img src="http://demo.dtcms.net/upload/201504/20/thumb_201504200046589514.jpg"/>
-      <h3>华为（HUAWEI）荣耀6Plus 16G双4G版</h3>
-      <div class="info">
-        <p class="price">
-          <span class="now">￥2195</span>
-          <span class="old">￥2499</span>
-        </p>
-        <p class="sell">
-          <span>热卖中</span>
-          <span>剩60件</span>
-        </p>
-      </div>
-    </div>
-    <div class="goods-item">
-      <img src="http://demo.dtcms.net/upload/201504/20/thumb_201504200046589514.jpg"/>
-      <h3>华为（HUAWEI）荣耀6Plus 16G双4G版</h3>
-      <div class="info">
-        <p class="price">
-          <span class="now">￥2195</span>
-          <span class="old">￥2499</span>
-        </p>
-        <p class="sell">
-          <span>热卖中</span>
-          <span>剩60件</span>
-        </p>
-      </div>
-    </div>
+    <mt-button type="danger" size="large" @click="getMore">加载更多</mt-button>
   </div>
 </template>
 
 <script>
 export default {
-    
+  data() {
+    return {
+      pageIndex: 1,
+      goodsList: []
+    }
+  },
+  methods: {
+    generateGoodsList() {
+      this.$http.get("api/getgoods?pageindex=" + this.pageIndex).then(result => {
+        if (result.body.status == 0) {
+          this.goodsList = this.goodsList.concat(result.body.message)
+        }
+      })
+    },
+    getMore() {
+      this.pageIndex++
+      this.generateGoodsList()
+    },
+    goDetail(id) {
+      //注意this.$route和this.$router的区别
+      // 注意： 一定要区分 this.$route 和 this.$router 这两个对象，
+      // 其中： this.$route 是路由【参数对象】，所有路由中的参数， params, query 都属于它
+      // 其中： this.$router 是一个路由【导航对象】，用它 可以方便的 使用 JS 代码，实现路由的 前进、后退、 跳转到新的 URL 地址
+      //简单跳转
+      //this.$router.push("/home/goodsinfo/" + id)
+      //传递对象
+      //this.$router.push({path: "/home/goodsinfo/" + id})
+      //传递命名的路由
+      //this.$router.push({name: "goodsinfo", params:{id: id}}) 
+      this.$router.push({name: "goodsinfo", params:{ id }}) //{id: id} ==> {id}
+    }
+  },
+  created() {
+    this.generateGoodsList()
+  }
 }
 </script>
 
@@ -100,3 +127,4 @@ export default {
   
 }
 </style>
+ 
