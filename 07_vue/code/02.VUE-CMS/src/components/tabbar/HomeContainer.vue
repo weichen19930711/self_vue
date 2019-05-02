@@ -1,10 +1,6 @@
 <<template>
   <div>
-    <mt-swipe :auto="4000">
-      <mt-swipe-item v-for="item in carousel" :key="item.id">
-        <img :src="item.img" alt=""/>
-      </mt-swipe-item>
-    </mt-swipe>
+    <carousel :carouselPics="carouselPics" isfull></carousel>
 
     <!-- 九宫格 到 6宫格 的改造工程 -->
     <ul class="mui-table-view mui-grid-view mui-grid-9">
@@ -50,21 +46,25 @@
 
 <<script>
 import { Toast } from "mint-ui";
+import carousel from "../subcomponents/Carousel.vue"
 
 export default {
   data() {
     return {
-      carousel: null
+      carouselPics: []
     }
   },
+  components: {
+    carousel
+  },
   created() {
-    this.generateCarousel()
+    this.generatecarouselPics()
   },
   methods: {
-    generateCarousel() {
+    generatecarouselPics() {
       this.$http.get("api/getlunbo").then(res => {
         if(res.body.status === 0) {
-          this.carousel = res.body.message
+          this.carouselPics = res.body.message
         } else {
           Toast("获取图片失败")       
         }
@@ -75,26 +75,7 @@ export default {
 }
 </script>
 
-<<style lang="scss" scoped>
-  .mint-swipe {
-    height:200px;
-    .mint-swipe-item {
-      &:nth-child(1) {
-        background-color: red;
-      }
-      &:nth-child(2) {
-        background-color: blue;
-      }
-      &:nth-child(3) {
-        background-color: yellow;
-      }
-      img {
-        width: 100%;
-        height: 100%;
-      }
-    }
-  }
-
+<style lang="scss" scoped>
   .mui-grid-view.mui-grid-9 {
     background-color: #fff;
     border:none;
