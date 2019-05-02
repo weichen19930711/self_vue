@@ -7,7 +7,7 @@
       </p>
       <div class="content" v-html="newsInfo.content"></div>
 
-      <comment-box :id="id"></comment-box>
+      <comment-box v-model="displayComment" :id="id" hasPage></comment-box>
   </div>
 </template>
 
@@ -20,7 +20,8 @@ export default {
           id: this.$route.params.id,
           newsInfo: {
 
-          }
+          },
+          displayComment: false
       }
   },
   created() {

@@ -14,7 +14,7 @@
 
 <body>
     <div id="app">
-      <com1 :parentmsg="msg"></com1>
+      <com1 :parentmsg="msg" hasPage></com1>
     </div>
 
     <script>
@@ -34,7 +34,15 @@
               }
             },
             template: "<h3 @click='change'>这是子组件 --- {{ parentmsg }}</h3>",
-            props: ['parentmsg'],
+            props: {
+              parentmsg: {
+                type: String
+              },
+              hasPage: {
+                type: Boolean/* ,
+                default: true */
+              }
+            },
             methods: {
               change() {
                 //这样改会有warn, Vue不提倡这样改

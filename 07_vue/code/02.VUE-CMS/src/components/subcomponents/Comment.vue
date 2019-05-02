@@ -28,7 +28,13 @@ export default {
             comment: ""
         }
     },
-    props: ["id"],
+    props: {
+        id: String,
+        hasPage: {
+            type: Boolean,
+            default: false
+        }
+    },
     created() {
         this.generateComments()
     },
