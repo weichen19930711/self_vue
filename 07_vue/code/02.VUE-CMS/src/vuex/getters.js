@@ -1,6 +1,6 @@
 const getters = {
     name: state => state.user.name,
-    cars: state => state.car.goods,
+    goods: state => state.car.goods,
     allCount: state => state.car.allCount
 }
 
