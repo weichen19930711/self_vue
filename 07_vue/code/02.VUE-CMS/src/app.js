@@ -38,6 +38,8 @@ Vue.http.options.emulateJSON = true;
 import VuePreview from 'vue-preview'
 Vue.use(VuePreview)
 
+import store from './vuex/store'
+
 import './filters/dateFormat.js'
 router.beforeEach((to, from, next) => {
     console.log("before each...")
@@ -62,6 +64,7 @@ router.afterEach(() => {
 var vm = new Vue({
     el:'#app',
     render: c => c(App),
-    router
+    router,
+    store
 })
 console.log(vm.$modal)

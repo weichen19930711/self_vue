@@ -1,6 +1,9 @@
 <template>
   <div>
-    counter
+    <input type="button" value="减少" @click="remove">
+    <input type="button" value="增加" @click="add">
+    <br>
+    <input type="text" v-model="this.$store.state.count">
   </div>
 </template>
 
@@ -8,10 +11,20 @@
 export default {
   data() {
     return {
-      // count: 0
-    };
+    }
+  },
+  methods: {
+    remove() {
+
+    },
+    add() {
+      this.$store.commit("increment")
+    },
+    remove() {
+      this.$store.commit("substract", {c: 1, d:3})
+    }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

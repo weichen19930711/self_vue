@@ -1,6 +1,6 @@
 <template>
   <div>
-    amount
+    <h3>{{ this.$store.getters.countOpt}}</h3>
   </div>
 </template>
 

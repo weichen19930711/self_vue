@@ -96,6 +96,13 @@
       },
       addToShopCat() {
         this.ballFlag = !this.ballFlag
+        let goodInfo = {
+          id: this.id,
+          count: this.goodsAmountOfShopCat,
+          price: this.goodsInfo.sell_price,
+          selected: true
+        }
+        this.$store.commit("addToCar", goodInfo)
       },
       updateGoodsAmountOfShopCat(count) {
         this.goodsAmountOfShopCat = count
