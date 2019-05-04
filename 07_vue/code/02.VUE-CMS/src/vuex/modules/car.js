@@ -1,10 +1,7 @@
 let goods = JSON.parse(window.localStorage.getItem("goods") || '[]')
-let allCount = parseInt(window.localStorage.getItem("allCount") || '0')
 
 const state = {
-  goods: goods,
-  allCount: allCount,
-  goodsCount: {}
+  goods: goods
 }
 
 const mutations = {
@@ -20,19 +17,69 @@ const mutations = {
     if (!flag) {
       state.goods.push(goodInfo)  
     }
-    state.allCount += parseInt(goodInfo.count)
-
     window.localStorage.setItem("goods", JSON.stringify(state.goods))
-    window.localStorage.setItem("allCount", state.allCount)
+  },
+  updateGoodsCount(state, goodInfo) {
+    state.goods.some(item => {
+      if (item.id == goodInfo.id) {
+        item.count = parseInt(goodInfo.count)
+      }
+    })
+    window.localStorage.setItem("goods", JSON.stringify(state.goods))
+  },
+  updateGoodsSelected(state, goodInfo) {
+    state.goods.some(item => {
+      if (item.id == goodInfo.id) {
+        item.selected = goodInfo.selected
+      }
+    })
+    window.localStorage.setItem("goods", JSON.stringify(state.goods))
+  },
+  removeGoods(state, id) {
+    state.goods.some((item, i) => {
+      if (item.id == id) {
+        state.goods.splice(i, 1)
+        return true
+      }
+    })
+     window.localStorage.setItem("goods", JSON.stringify(state.goods))
   } 
 }
 
 const getters = {
   goodsCount: function(state) {
+    let goodsCount_ = {}
     state.goods.forEach(good => {
-      state.goodsCount[good.id] = good.count 
+      goodsCount_[good.id] = good.count 
     })
-    return state.goodsCount
+    return goodsCount_
+  },
+  allCount: function(state) {
+    let allCount_ = 0
+    state.goods.forEach(item => {
+      allCount_ += item.count
+    })
+    return allCount_
+  },
+  goodsSelected: function(state) {
+    let goodsSelected_ = {}
+    state.goods.forEach(item => {
+      goodsSelected_[item.id] = item.selected
+    })
+    return goodsSelected_
+  },
+  goodsSettleInfo: function(state) {
+    let goodsSettleInfo_ = {
+      count: 0,
+      amount: 0
+    }
+    state.goods.forEach(item => {
+      if (item.selected) {
+        goodsSettleInfo_.count += item.count
+        goodsSettleInfo_.amount += item.price * item.count
+      }
+    })
+    return goodsSettleInfo_
   }
 }
 

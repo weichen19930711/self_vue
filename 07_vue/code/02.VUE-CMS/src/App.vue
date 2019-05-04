@@ -1,7 +1,9 @@
 <template> 
   <div class="app-container">
     <!--header-->
-    <mt-header fixed title="饿了么"></mt-header>
+    <mt-header fixed title="饿了么">
+			<mt-button v-show="backButtonFlag" slot="left" icon="back" @click="goBack">返回</mt-button>
+		</mt-header>
     <!--content-->
     <!-- <h1>这是 App 组件</h1>
 		<router-link to="/login">login</router-link>
@@ -40,7 +42,30 @@
   </div>
 </template>
 <script>
-  
+  export default {
+		data() {
+			return {
+				backButtonFlag: false
+			}
+		},
+		methods: {
+			goBack() {
+				this.$router.go(-1)
+			}
+		},
+		watch: {
+			"$route.path": function(newVal) {
+				if (newVal == "/home") {
+					this.backButtonFlag = false
+				} else {
+					this.backButtonFlag = true
+				}
+			}
+		},
+		created() {
+			this.backButtonFlag = (this.$route.path !== "/home")
+		}
+	}
 </script>
 <style lang="scss" scoped>
 	.app-container {
@@ -128,5 +153,9 @@
 				display: block;
 				overflow: hidden;
 				text-overflow: ellipsis;
+		}
+
+		button:enabled:active {
+			background-color: #26a2ff;
 		}
 </style>
